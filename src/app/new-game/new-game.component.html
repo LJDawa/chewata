@@ -1,0 +1,59 @@
+<bs-navbar></bs-navbar>
+<div class="row">
+  <div class="col-md-6">
+    <form #f="ngForm" (ngSubmit)="save(f.value)">
+      <div class="form-group">
+        <label for="title">Game Title</label>
+        <input #title="ngModel" [(ngModel)]="game.title" name="title" id="title" type="text" class="form-control" required>
+        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+          Give your game a title.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="category">Game Category</label>
+        <select #category="ngModel" [(ngModel)]="game.category" name="category" id="category" class="form-control" required>
+          <option value=""></option>
+          <option *ngFor="let c of categories$ | async" [value]="c.$key">
+            {{ c.name }}
+          </option>
+        </select>
+        <div class="alert alert-danger" *ngIf="category.touched && category.invalid">
+          Game category is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="numberOfPlayers">Number Of Players</label>
+        <div class="input-group">
+          <input #numberOfPlayers="ngModel" [(ngModel)]="game.numberOfPlayers" name="numberOfPlayers" id="numberOfPlayers" type="number"
+            class="form-control" required [min]="3">
+        </div>
+        <div class="alert alert-danger" *ngIf="numberOfPlayers.touched && numberOfPlayers.invalid">
+          <div *ngIf="numberOfPlayers.errors.required">Number of players is required.</div>
+          <div *ngIf="numberOfPlayers.errors.min">Number of players should be 3 or higher.</div>
+        </div>
+      </div>
+      <div class="form-group">
+          <label for="player1">Player 1</label>
+          <input #player1="ngModel" [(ngModel)]="game.player1" name="player1" id="player1" type="text" class="form-control" required>
+          <div class="alert alert-danger" *ngIf="player1.touched && player1.invalid">
+            Player 1's name is required.
+          </div>
+          <label for="player2">Player 2</label>
+          <input #player2="ngModel" [(ngModel)]="game.player2" name="player2" id="player2" type="text" class="form-control" required>
+          <div class="alert alert-danger" *ngIf="player2.touched && player2.invalid">
+            Player 2's name is required.
+          </div>
+          <label for="player3">Player 3</label>
+          <input #player3="ngModel" [(ngModel)]="game.player3" name="player3" id="player3" type="text" class="form-control" required>
+          <div class="alert alert-danger" *ngIf="player3.touched && player3.invalid">
+            Player 3's name is required.
+          </div>
+      </div>
+      <button [disabled]="!f.valid" class="btn btn-primary">Create</button>
+      <button *ngIf="id" type="button" (click)="delete()" class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+  <div class="col-md-4">
+    <game-card [game]="game" [show-actions]="false"></game-card>
+  </div>
+</div>

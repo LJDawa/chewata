@@ -1,0 +1,35 @@
+<bs-navbar></bs-navbar>
+<h1>Scoreboard</h1>
+<div class="col-md-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Round</th>
+          <th>Player</th>
+          <th>Bid</th>
+          <th>Made</th>
+          <th>Penalty</th>
+        </tr>
+      </thead> 
+      <!-- <tbody>
+        <tr *ngFor="let order of orders$ | async">
+          <td>{{ order.shipping.name }}</td>
+          <td>{{ order.datePlaced | date}}</td>
+          <td>
+            <a href="#">View</a>
+          </td>
+        </tr>
+      </tbody>  -->
+      <tfoot>
+          <tr>
+            <th colspan="4">
+              <a *ngIf="cart.items.length" routerLink="/check-out" class="btn btn-primary">Check Out</a>
+              <a  routerLink="/check-out" class="btn btn-primary">New Bid</a>
+            </th>
+          </tr>
+        </tfoot>
+    </table>
+</div>
+<div class="col-md-4">
+  <game-card [game]="game" [show-actions]="false"></game-card>
+</div>

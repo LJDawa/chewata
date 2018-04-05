@@ -3,10 +3,11 @@ import { AppUser } from './models/app-user';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Injectable } from '@angular/core';
+
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of'; 
 import * as firebase from 'firebase'; 
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AuthService {
@@ -28,6 +29,10 @@ export class AuthService {
 
   logout() { 
     this.afAuth.auth.signOut();
+  }
+
+  signup(em, pw) {
+    this.afAuth.auth.createUserWithEmailAndPassword(em, pw);
   }
 
   get appUser$() : Observable<AppUser> {
